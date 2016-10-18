@@ -1,0 +1,34 @@
+
+<p id="notice"><%= notice %></p>
+
+  <h1>Tweets</h1>
+
+  <div class="row">
+    <% @t.each do |x| %>
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <%= link_to x.user.username, profile_path(id: x.user.id) %>
+
+        </div>
+        
+        <div class="panel-body">
+         <%=  x.message %> <br>
+          <i>Posted <%= x.created_at.strftime('%m/%d/%Y at %I:%M%p') %></i>
+        
+        </div>
+
+        <% if current_user.id == x.user.id %>
+        <div class="panel-footer">
+          <%= link_to "Edit", edit_tweet_path(x), class: "btn btn-warning" %>
+          <%= link_to "Delete", x, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <br>
+
+<%= link_to 'New Tweet', new_tweet_path %>

@@ -1,0 +1,26 @@
+
+
+<p id="notice"><%= notice %></p>
+
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<strong>Tweet Feed</strong>
+  			
+		</div>
+		<div class="panel-body">
+			<p>Posted by: <%= link_to @tweet.user.username, profile_path(id: @tweet.user.id) %></p>
+			<p><%= @tweet.message %></p>
+			
+		</div>
+
+		 <% if current_user.id == @tweet.user.id %>
+        <div class="panel-footer">
+          <%= link_to "Edit", edit_tweet_path(@tweet), class: "btn btn-warning" %>
+          <%= link_to "Delete", @tweet, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+        </div>
+        <% end %>
+        
+	</div>
+
+	<%= link_to 'Back', tweets_path %>
