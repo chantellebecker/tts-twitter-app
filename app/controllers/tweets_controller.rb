@@ -24,7 +24,7 @@ class TweetsController < ApplicationController
 
     	respond_to do |format|
       		if @tweet.save
-        		format.html { redirect_to @tweet, notice: 'Tweet was successfully created.' }
+        		format.html { redirect_to @tweet, notice: 'Twitt was successfully created.' }
       		else
         		format.html { render :new }
       		end
@@ -45,7 +45,7 @@ class TweetsController < ApplicationController
   	def destroy
       	@tweet.destroy
     		respond_to do |format|
-      			format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
+      			format.html { redirect_to tweets_url, notice: 'Twitt was successfully destroyed.' }
     		end
   	end
 

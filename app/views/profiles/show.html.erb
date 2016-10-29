@@ -10,7 +10,7 @@
       </div>
       <div class="row">
         <div class="col-xs-4">
-          <span class="small text">TWEETS</span><br>
+          <span class="small text">TWITTS</span><br>
             <%= @user.tweets.count %>
 
         </div>
@@ -30,35 +30,41 @@
      <br>
      <% if current_user.id != @user.id %>
       <% if current_user.friends.include?(@user) %>
-        <%= link_to "Unfollow", relationship_path(current_user.relationships.find_by_friend_id(@user)), :method => :delete %>
+        <%= link_to "Following", relationship_path(current_user.relationships.find_by_friend_id(@user)), :method => :delete, class: "btn btn-primary", id: "unfollow_btn" %>
       <% else %>
-        <%= link_to "Follow", relationships_path(:friend_id => @user), method: :post %>
+        <%= link_to "Follow", relationships_path(:friend_id => @user), method: :post, class: "btn btn-primary" %>
       <% end %>
     <% end %>
     </div>
   </div>
   <div class="col-xs-1"></div>
 
+
+
   <div class="col-xs-7 panel panel-default">
+  <% if current_user.id == @user.id %>
+    <h2>What's on your mind?</h2>
+    <%= render 'tweets/form' %>
+  <% end %>
     <% @user.tweets.each do |tweet| %>
       <div class="panel-body">
-        <% if tweet.avatar_file_name != nil %>
-        <%= image_tag(tweet.avatar.url(:thumb), class: "img-responsive") %>
-        <% end %>
         <strong><%= tweet.user.username %></strong>
-        <small>tweeted <%= time_ago_in_words(tweet.created_at) %>ago</small>
+        <small>twitted <%= time_ago_in_words(tweet.created_at) %> ago</small>
         <br>
         <br>
         <%= tweet.message %>
+        <% if tweet.avatar_file_name != nil %>
+        <%= image_tag(tweet.avatar.url(:medium), class: "img-responsive") %>
+        <% end %>
       </div>
       <div class="panel-body">
         <% if current_user.likes?(tweet) %>
           <%= link_to tweet_like_path(tweet), method: :delete do %>
-            <i class="glyphicon glyphicon-heart"></i>
+            <i class="glyphicon glyphicon-heart-empty"></i>
           <% end %>
         <% else %>
           <%= link_to tweet_like_path(tweet), method: :post do %>
-            <i class="glyphicon glyphicon-heart-empty"></i>
+            <i class="glyphicon glyphicon-heart"></i>
             <% end %>
         <% end %>
         <br>

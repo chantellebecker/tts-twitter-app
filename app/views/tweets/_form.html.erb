@@ -1,7 +1,7 @@
 <%= form_for(@tweet) do |f| %>
 <% if @tweet.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+      <h2><%= pluralize(@tweet.errors.count, "error") %> prohibited this twitt from being saved:</h2>
 
       <ul>
         <% @tweet.errors.full_messages.each do |message| %>
@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= f.label :message %><br>
-    <%= f.text_field :message, class: "form-control", placeholder: "Tweet here!", rows: 2 %>
+    <%= f.text_field :message, class: "form-control", placeholder: "Twitt here!", rows: 2 %>
   </div>
   <div class="cant-see-me">
     <%= f.label :user_id %><br>
